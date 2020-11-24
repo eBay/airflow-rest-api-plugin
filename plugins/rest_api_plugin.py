@@ -33,37 +33,6 @@ airflow_version = airflow.__version__
 rest_api_plugin_version = __version__
 
 
-def get_config_string_value(section, key, default_value):
-    """
-    Get config value as String for a given section/key
-    """
-    config_value = default_value
-    try:
-        config_value = configuration.get(section, key)
-        if config_value == '':
-            logging.warning(
-                "[" + str(section) + "/" + str(key) + "] value is empty")
-    except Exception as e:
-        logging.warning(
-            "Initializing [" + str(section) + "/" + str(key) + "] with default value = " + str(default_value))
-
-    return config_value
-
-
-def get_config_boolean_value(section, key, default_value):
-    """
-    Get config value as Boolean for a given section/key
-    """
-    config_value = default_value
-    try:
-        config_value = configuration.getboolean(section, key)
-    except Exception as e:
-        logging.warning(
-            "Initializing [" + str(section) + "/" + str(key) + "] with default value = " + str(default_value))
-
-    return config_value
-
-
 # Getting configurations from airflow.cfg file
 airflow_webserver_base_url = configuration.get('webserver', 'BASE_URL')
 airflow_dags_folder = configuration.get('core', 'DAGS_FOLDER')
@@ -531,9 +500,6 @@ class REST_API(get_baseview()):
         dag_id = self.get_argument(request, 'dag_id')
         logging.info("dag_id to delete: '" + str(dag_id) + "'")
 
-        if self.is_arg_not_provided(dag_id):
-            return ApiResponse.bad_request("dag_id should be provided")
-
         try:
             dag_full_path = airflow_dags_folder + os.sep + dag_id + ".py"
 
@@ -599,14 +565,7 @@ class REST_API(get_baseview()):
         logging.info("Executing custom 'dag_state' function")
 
         dag_id = self.get_argument(request, 'dag_id')
-        if self.is_arg_not_provided(dag_id):
-            logging.error("dag_id should be provided")
-            return ApiResponse.bad_request("dag_id should be provided")
-
         run_id = self.get_argument(request, 'run_id')
-        if self.is_arg_not_provided(run_id):
-            logging.error("run_id should be provided")
-            return ApiResponse.bad_request("run_id should be provided")
 
         session = settings.Session()
         query = session.query(DagRun)
@@ -635,19 +594,8 @@ class REST_API(get_baseview()):
         logging.info("Executing custom 'task_instance_detail' function")
 
         dag_id = self.get_argument(request, 'dag_id')
-        if self.is_arg_not_provided(dag_id):
-            logging.error("dag_id should be provided")
-            return ApiResponse.bad_request("dag_id should be provided")
-
         run_id = self.get_argument(request, 'run_id')
-        if self.is_arg_not_provided(run_id):
-            logging.error("run_id should be provided")
-            return ApiResponse.bad_request("run_id should be provided")
-
         task_id = self.get_argument(request, 'task_id')
-        if self.is_arg_not_provided(task_id):
-            logging.error("task_id should be provided")
-            return ApiResponse.bad_request("task_id should be provided")
 
         session = settings.Session()
         query = session.query(DagRun)
@@ -688,14 +636,7 @@ class REST_API(get_baseview()):
         dagbag = self.get_dagbag()
 
         dag_id = self.get_argument(request, 'dag_id')
-        if self.is_arg_not_provided(dag_id):
-            logging.error("dag_id should be provided")
-            return ApiResponse.bad_request("dag_id should be provided")
-
         run_id = self.get_argument(request, 'run_id')
-        if self.is_arg_not_provided(run_id):
-            logging.error("run_id should be provided")
-            return ApiResponse.bad_request("run_id should be provided")
 
         session = settings.Session()
         query = session.query(DagRun)
@@ -761,15 +702,7 @@ class REST_API(get_baseview()):
         dagbag = self.get_dagbag()
 
         dag_id = self.get_argument(request, 'dag_id')
-        if self.is_arg_not_provided(dag_id):
-            logging.error("dag_id should be provided")
-            return ApiResponse.bad_request("dag_id should be provided")
-
         run_id = self.get_argument(request, 'run_id')
-        if self.is_arg_not_provided(run_id):
-            logging.error("run_id should be provided")
-            return ApiResponse.bad_request("run_id should be provided")
-
         task_id = self.get_argument(request, 'task_id')
 
         session = settings.Session()
@@ -833,20 +766,8 @@ class REST_API(get_baseview()):
         dagbag = self.get_dagbag()
 
         dag_id = self.get_argument(request, 'dag_id')
-        if self.is_arg_not_provided(dag_id):
-            logging.error("dag_id should be provided")
-            return ApiResponse.bad_request("dag_id should be provided")
-
         run_id = self.get_argument(request, 'run_id')
-        if self.is_arg_not_provided(run_id):
-            logging.error("run_id should be provided")
-            return ApiResponse.bad_request("run_id should be provided")
-
         tasks = self.get_argument(request, 'tasks')
-        if self.is_arg_not_provided(tasks):
-            logging.error("tasks should be provided")
-            return ApiResponse.bad_request("tasks should be provided")
-
         conf = self.get_argument(request, 'conf')
 
         run_conf = None
@@ -916,19 +837,8 @@ class REST_API(get_baseview()):
         logging.info("Executing custom 'skip_task_instance' function")
 
         dag_id = self.get_argument(request, 'dag_id')
-        if self.is_arg_not_provided(dag_id):
-            logging.error("dag_id should be provided")
-            return ApiResponse.bad_request("dag_id should be provided")
-
         run_id = self.get_argument(request, 'run_id')
-        if self.is_arg_not_provided(run_id):
-            logging.error("run_id should be provided")
-            return ApiResponse.bad_request("run_id should be provided")
-
         task_id = self.get_argument(request, 'task_id')
-        if self.is_arg_not_provided(task_id):
-            logging.error("task_id should be provided")
-            return ApiResponse.bad_request("task_id should be provided")
 
         session = settings.Session()
         query = session.query(DagRun)

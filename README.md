@@ -358,6 +358,21 @@ curl -X GET http://localhost:8080/admin/rest_api/api?api=skip_task_instance&dag_
 }
 ```
 
+## Run UT
+In order to view the ut coverage, you need to install `coverage`, which can be installed by the following command: 
+```bash
+pip install coverage
+```
+Run the `tests/test_rest_api_plugins.py` file，generate a `.coverage` file
+```bash
+coverage run tests/test_rest_api_plugins.py
+```
+Generate html format file
+```bash
+coverage html
+```
+Open the `htmlcov/index.html` file with a browser to view the coverage of ut
+
 ## Contributing to the Project
 Bugs and new features should be submitted using Github issues. Please include with a detailed description and the expected behaviour. If you would like to submit a change yourself do the following steps.
 1. Fork it.

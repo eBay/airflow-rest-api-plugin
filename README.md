@@ -394,7 +394,7 @@ Please keep your branch up to date by rebasing upstream changes from master.
 #### Why use Product?
 Achieve airflow custom interface, make up for the lack of flexibility of airflow official interface, and meet business needs at the same time
 
-[a relative link](CONTRIBUTING.md)
+[CONTRIBUTING](CONTRIBUTING.md)
 
-[a relative link](LICENCE.md)
+[LICENCE](LICENCE.md)
 

@@ -1,5 +1,5 @@
 # Airflow Plugin - API
-A plugin of Apache Airflow that exposes REST endpoints for custom REST APIs, providing richer functionalities to support more powerful DAG and task management capabilities for Airflow. 
+A plugin of Apache Airflow that exposes REST endpoints for custom REST APIs, providing richer functionalities to support more powerful DAG and task management capabilities for Airflow. See the "Using the REST API" section for all the APIs enriched in this plugin.
 
 ## Requirements
 - [apache-airflow](https://github.com/apache/airflow)

@@ -14,8 +14,8 @@ A plugin of Apache Airflow that exposes REST endpoints for custom REST APIs, pro
 ```url
 https://github.corp.ebay.com/linhgao/airflow-rest-api-plugin/archive/master.zip
 ```
-2. Check the [plugins_floder](http://airflow.apache.org/docs/1.10.11/configurations-ref.html#plugins-folder) configuration in airflow.cfg. If not, please configure.
-3. Unzip the plugins zip, move `rest_api_plugin.py` and `templates folder` to [plugins_floder](http://airflow.apache.org/docs/1.10.11/configurations-ref.html#plugins-folder) directory.
+2. Check the [plugins_folder](http://airflow.apache.org/docs/1.10.11/configurations-ref.html#plugins-folder) configuration in airflow.cfg. If not, please configure.
+3. Unzip the plugins zip, move `rest_api_plugin.py` and `templates folder` to [plugins_folder](http://airflow.apache.org/docs/1.10.11/configurations-ref.html#plugins-folder) directory.
 ```bash
 unzip airflow-rest-api-plugin-master.zip
 
@@ -140,7 +140,7 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F 'dag_file=@dag_test.py' -
 ```
 ### ***<span id="refresh_all_dags">refresh_all_dags</span>***
 ##### Description:
-- Get all dags from dag_floder, refresh the dags to the session.
+- Get all dags from dag_folder, refresh the dags to the session.
 ##### Endpoint:
 ```text
 http://{AIRFLOW_HOST}:{AIRFLOW_PORT}/admin/rest_api/api?api=refresh_all_dags
